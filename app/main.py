@@ -11,7 +11,3 @@ def home_page():
 @app.route('/peering.html', methods=["GET"])
 def peering():
     return render_template('peering.html', users_ip=request.remote_addr)
-
-if __name__ == '__main__':
-    app.debug = True
-    app.run(debug=True, host='0.0.0.0')
