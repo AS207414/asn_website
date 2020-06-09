@@ -1,12 +1,18 @@
 version: '3'
 services:
-  web:
+  asn:
     build: ./
+    container_name: asn
     volumes:
       - ./app:/app
     ports:
-      - "80:80"
+      - "127.0.0.01:6700:80"
     environment:
       - FLASK_APP=main.py
       - FLASK_DEBUG=1
       - 'RUN=flask run --host=0.0.0.0 --port=80'
+
+networks:
+  default:
+    external:
+      name: media
