@@ -1,3 +1,23 @@
+{% extends "base.html" %}
+{% block html_lang %}{{ page.lang }}{% endblock %}
+
+{% block title %}{{ SITENAME }} - {{ page.title|striptags }}{%endblock%}
+
+{% block content %}
+    <h1>{{ page.title }}</h1>
+    {% import 'translations.html' as translations with context %}
+    {{ translations.translations_for(page) }}
+
+    {{ page.content }}
+
+    {% if page.modified %}
+        <p>
+        Last updated: {{ page.locale_modified }}
+        </p>
+    {% endif %}
+{% endblock %}
+
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -40,33 +60,8 @@
 
     <body>
 
-        <nav class="navbar navbar-expand-lg navbar-light bg-light rounded">
-        <a class="navbar-brand" href="#">AS207414</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample09" aria-controls="navbarsExample09" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarsExample09">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="{{ url_for('home_page') }}">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="dropdown09" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Services</a>
-              <div class="dropdown-menu" aria-labelledby="dropdown09">
-                <a class="dropdown-item" href="https://speedtest.as207414.net">Speedtest</a>
-                <a class="dropdown-item disabled" href="#">Looking Glass (Coming Soon)</a>
-                <a class="dropdown-item disabled" href="#">Anycast Public PiHole (Coming Soon)</a>
-                <a class="dropdown-item disabled" href="#">NTP (Coming Soon)</a>
-
-              </div>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('peering') }}">Peering Policy</a>
-            </li>
-          </ul>
-        </div>
-      </nav>
+    <!-- Begin header content -->
+    {% include 'header.html' %}
 
     <!-- Begin page content -->
     <main role="main" class="container">
@@ -88,7 +83,7 @@
 
     <footer class="footer">
       <div class="container">
-        <span class="text-muted">© 2019 AS207414. All rights reserved. Your IP is {{ users_ip }}</span>
+        <span class="text-muted">© 2019 AS207414. All rights reserved.</span>
       </div>
     </footer>
 

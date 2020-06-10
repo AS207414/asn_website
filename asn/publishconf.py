@@ -12,7 +12,15 @@ from pelicanconf import *
 
 # If your site is available via HTTPS, make sure SITEURL begins with https://
 SITEURL = 'as207414.net'
+BIND = '0.0.0.0'
+# CACHE_CONTENT = False
+# CACHE_PATH = 'cache'
+# CHECK_MODIFIED_METHOD = 'mtime'
+# LOAD_CONTENT_CACHE = True
+
+# URL Settings
 RELATIVE_URLS = False
+
 
 FEED_ALL_ATOM = 'feeds/all.atom.xml'
 CATEGORY_FEED_ATOM = 'feeds/{slug}.atom.xml'
