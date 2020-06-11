@@ -1,96 +1,19 @@
-<!doctype html>
-<html lang="en">
-  <head>
+{% extends "base.html" %}
+{% block title %}AS207414.net{% endblock %}
+{% block content %}
 
-        <!-- Global site tag (gtag.js) - Google Analytics -->
-        <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=UA-158211891-1"></script> -->
-        <!-- <script> -->
-        <!--   window.dataLayer = window.dataLayer || []; -->
-        <!--   function gtag(){dataLayer.push(arguments);} -->
-        <!--   gtag('js', new Date()); -->
+    <h1 class="mt-5">AS207414</h1>
 
-        <!--   gtag('config', 'UA-158211891-1'); -->
-        <!-- </script> -->
-
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>AS207414net</title>
-
-    <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
-    <!-- Custom styles for this template -->
-    <link href="../static/css/sticky-footer.css" rel="stylesheet">
-    <link href="../static/css/grid.css" rel="stylesheet">
-
-    <!-- jQuery library -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
-    <!-- Popper JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-
-    <!-- Latest compiled JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-
-
-  </head>
-
-    <body>
-
-        <nav class="navbar navbar-expand-lg navbar-light bg-light rounded">
-        <a class="navbar-brand" href="#">AS207414</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample09" aria-controls="navbarsExample09" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarsExample09">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="{{ url_for('home_page') }}">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="dropdown09" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Services</a>
-              <div class="dropdown-menu" aria-labelledby="dropdown09">
-                <a class="dropdown-item" href="https://speedtest.as207414.net">Speedtest</a>
-                <a class="dropdown-item disabled" href="#">Looking Glass (Coming Soon)</a>
-                <a class="dropdown-item disabled" href="#">Anycast Public PiHole (Coming Soon)</a>
-                <a class="dropdown-item disabled" href="#">NTP (Coming Soon)</a>
-
-              </div>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('peering') }}">Peering Policy</a>
-            </li>
-          </ul>
-        </div>
-      </nav>
-
-    <!-- Begin page content -->
-    <main role="main" class="container">
-        <h1 class="mt-5">AS207414</h1>
-
-        <p>The main purpose for this network is learning and research. I hope to maintain an open peering
+    <p>The main purpose for this network is learning and research. I hope to maintain an open peering
         policy with anyone interested. Be patient with me, and I promise I will be patient with you. </p>
 
-        <h4> Peering Policy: </h4>
-        <p> Open Peering Policy. We can connect via any IXP sites I'm located at  and eventually over a
-            tunnel (GRE/SIT). </p>
-        <p> Please email <a href="mailto:noc@juanah.cloud"> noc@juanah.cloud </a> if you
-            agree to the terms below and wish to peer:</p>
-        <p> - Peers may only send traffic to destinations announced by AS207414. </p>
-        <p> - Peers may only send traffic originating from their own networks. </p>
-        <p> - Peers are not allowed to point static routes towards AS207414. </p>
+    <h4> Peering Policy: </h4>
+    <p> Open Peering Policy. We can connect via any IXP sites I'm located at and eventually over a
+        tunnel (GRE/SIT). </p>
+    <p> Please email <a href="mailto:noc@juanah.cloud"> noc@juanah.cloud </a> if you
+        agree to the terms below and wish to peer:</p>
+    <p> - Peers may only send traffic to destinations announced by AS207414. </p>
+    <p> - Peers may only send traffic originating from their own networks. </p>
+    <p> - Peers are not allowed to point static routes towards AS207414. </p>
 
-    </main>
-
-    <footer class="footer">
-      <div class="container">
-        <span class="text-muted">© 2019 AS207414. All rights reserved. Your IP is {{ users_ip }}</span>
-      </div>
-    </footer>
-
-</body>
-</html>
+{% endblock %}
