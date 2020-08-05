@@ -28,7 +28,7 @@ build:
 
 unittest:
   stage: test
-  image: python3
+  image: python:3
   only:
     - develop
   script:
