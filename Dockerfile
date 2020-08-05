@@ -1,5 +1,5 @@
 # pull official base image
-FROM python:3-buster
+FROM python:3
 
 MAINTAINER Ganawa Juanah
 LABEL version="1.0"
@@ -10,6 +10,9 @@ ENV USER=asn
 ENV GROUP=asn
 ENV HOME=/home/asn
 ENV ASN_HOME=/home/asn/app
+
+# setup flask variables
+ENV FLASK_ENV=production
 
 # create the asn user
 RUN addgroup --system $USER
@@ -30,3 +33,6 @@ RUN chown -R asn:asn $ASN_HOME
 
 # change to the app user
 USER asn
+
+# Entrypoint
+ENTRYPOINT ["./entrypoint.sh"]
