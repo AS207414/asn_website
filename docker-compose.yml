@@ -3,9 +3,5 @@ services:
   web:
     build: ./
     container_name: asn
-    command: gunicorn --bind 0.0.0.0:5000 main:app
     ports:
-      - "127.0.0.01:5000:5000"
-    environment:
-      - FLASK_APP=main.py
-      - FLASK_ENV=production
+      - "5000:5000"
