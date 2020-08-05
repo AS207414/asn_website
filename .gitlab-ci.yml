@@ -3,7 +3,7 @@ image: docker
 stages:
   - build
   - test
-#  - deploy
+  - push
 
 before_script:
   - echo -n $CI_JOB_TOKEN | docker login -u gitlab-ci-token --password-stdin $CI_REGISTRY
@@ -11,12 +11,7 @@ before_script:
 build:
   stage: build
   script:
-    # fetches the latest image (not failing if image is not found)
     - docker pull $CI_REGISTRY_IMAGE:latest || true
-    # builds the project, passing proxy variables, and vcs vars for LABEL
-    # notice the cache-from, which is going to use the image we just pulled locally
-    # the built image is tagged locally with the commit SHA, and then pushed to
-    # the GitLab registry
     - >
       docker build
       --pull
@@ -26,11 +21,9 @@ build:
 
     - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
 
-unittest:
+test:
   stage: test
   image: python:3
-
-  # ignore
   before_script:
     - pip install -r app/requirements.txt
   only:
@@ -38,32 +31,31 @@ unittest:
   script:
     - python -m unittest discover -s tests
 
-test:
-  stage: test
+push develop:
+  stage: push
   only:
     - develop
   script:
-    # Because we have no guarantee that this job will be picked up by the same runner
-#     that built the image in the previous step, we pull it again locally
     - docker pull $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
-    - docker run $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA curl --fail http://localhost:5000/ || exit 1
+    - docker tag $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA $CI_REGISTRY_IMAGE:develop
+    - docker push $CI_REGISTRY_IMAGE:develop
 
-#staging:
-#  stage: deploy
-#  script:
-#    - apt-get update -qy
-#    - apt-get install -y ruby-dev
-#    - gem install dpl
-#    - dpl --provider=heroku --app=gitlab-ci-python-test-staging --api-key=$HEROKU_STAGING_API_KEY
-#  only:
-#    - master
-#
-#production:
-#  stage: deploy
-#  script:
-#    - apt-get update -qy
-#    - apt-get install -y ruby-dev
-#    - gem install dpl
-#    - dpl --provider=heroku --app=gitlab-ci-python-test-prod --api-key=$HEROKU_PRODUCTION_API_KEY
-#  only:
-#    - tags
+push latest:
+  stage: push
+  only:
+    - master
+  script:
+    - docker pull $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
+    - docker tag $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA $CI_REGISTRY_IMAGE:latest
+    - docker push $CI_REGISTRY_IMAGE:latest
+
+Push tag:
+  variables:
+    GIT_STRATEGY: none
+  stage: push
+  only:
+    - tags
+  script:
+    - docker pull $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
+    - docker tag $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME
+    - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME
