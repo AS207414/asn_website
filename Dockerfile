@@ -1,6 +1,10 @@
 # pull official base image
 FROM python:3-buster
 
+MAINTAINER Ganawa Juanah
+LABEL version="1.0"
+LABEL description="ASN Website"
+
 # setup enviroment variables
 ENV USER=asn
 ENV GROUP=asn
