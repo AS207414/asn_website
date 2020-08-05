@@ -29,6 +29,10 @@ build:
 unittest:
   stage: test
   image: python:3
+
+  # ignore global before script
+  before_script:
+    - ''
   only:
     - develop
   script:
