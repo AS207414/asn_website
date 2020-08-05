@@ -34,5 +34,7 @@ RUN chown -R asn:asn $ASN_HOME
 # change to the app user
 USER asn
 
+HEALTHCHECK CMD curl --fail http://localhost:5000/ || exit 1
+
 # Entrypoint
 ENTRYPOINT ["./entrypoint.sh"]

@@ -32,27 +32,21 @@ unittest:
 
   # ignore
   before_script:
-    - ''
+    - pip install -r app/requirements.txt
   only:
     - develop
   script:
-    - pip install -r app/requirements.txt
     - python -m unittest discover -s tests
 
-#test:
-#  stage: test
-#  only:
-    # Only "master" should be tagged "latest"
-#    - develop
-#  script:
+test:
+  stage: test
+  only:
+    - develop
+  script:
     # Because we have no guarantee that this job will be picked up by the same runner
-    # that built the image in the previous step, we pull it again locally
-#    - docker pull $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
-#    - docker run $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA python -m unittest discover -s tests
-#  script:
-#    # this configures Django application to use attached postgres database that is run on `postgres` host
-#    - pip install -r app/requirements.txt
-#    - python -m unittest discover -s tests
+#     that built the image in the previous step, we pull it again locally
+    - docker pull $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
+    - docker run $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA curl --fail http://localhost:5000/ || exit 1
 
 #staging:
 #  stage: deploy
